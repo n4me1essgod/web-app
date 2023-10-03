@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Редактировать сотрудника{% endblock %}
+
+{% block body %}
+<div class="container-editcontainer">
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Фамилия" class="form-control" name="surname" value="{{ employeeSurname }}"><br>
+        <input type="text" placeholder="Имя" class="form-control" name="name" value="{{ employeeName }}"><br>
+        <input type="text" placeholder="Отчество" class="form-control" name="patronymic" value="{{ employeePatronymic }}"><br>
+        <select class="form-control" name="gender">
+            <option value="1" {% if genderName == 'Мужской' %}selected{% endif %}>Мужской</option>
+            <option value="2" {% if genderName == 'Женский' %}selected{% endif %}>Женский</option>
+        </select><br>
+        <input type="number" placeholder="Возраст" class="form-control" name="age" value="{{ employeeAge }}"><br>
+        <p>Выбирите должность:</p>
+        <select class="form-control" name="jobtitle">
+            {% for jobtitle in jobtitles %}
+                <option value="{{ jobtitle.0 }}" {% if jobtitle.1 == jobTitleName %}selected{% endif %}>{{ jobtitle.1 }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button class="btn btn-success button-add" type="submit">Сохранить изменения</button>
+    </form>
+</div>
+
+{% endblock %}

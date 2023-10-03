@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Добавление сотрудника{% endblock %}
+
+{% block body %}
+    <div class="container-editcontainer">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Фамилия" class="form-control" name="surname"><br>
+            <input type="text" placeholder="Имя" class="form-control" name="name"><br>
+            <input type="text" placeholder="Отчество" class="form-control" name="patronymic"><br>
+            <select class="form-control" name="gender">
+                <option value="1">Мужской</option>
+                <option value="2">Женский</option>
+            </select><br>
+            <input type="number" placeholder="Возраст" class="form-control" name="age"><br>
+            <p>Выбирите должность:</p>
+            <select class="form-control" name="jobtitle">
+                {% for jobtitle in jobtitles %}
+                    <option value="{{ jobtitle.0 }}">{{ jobtitle.1 }}</option>
+                {% endfor %}
+            </select><br>
+
+            <button class="btn btn-success button-add" type="submit">Добавить пользователя</button>
+            
+            {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+            {% endif %}
+
+            {% if message %}
+            <p class="message">{{ message }}</p>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

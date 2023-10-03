@@ -1,0 +1,25 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Редактирование должности{% endblock %}
+
+{% block body %}
+<div class="container-editcontainer">
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Должность" class="form-control" name="jobtitlename" value="{{ jobTitleName_old }}"><br>
+        <p>Выбирите категорию:</p>
+        <select class="form-control" name="category">
+            <option value="1">Рабочий</option>
+            <option value="2">Служащий</option>
+            <option value="3">Специалист</option>
+        </select><br>
+
+        <button class="btn btn-success button-save" type="submit">Сохранить</button>
+        {{ jobTitleName_old }}
+
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

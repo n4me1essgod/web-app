@@ -1,0 +1,24 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Добавить должность{% endblock %}
+
+{% block body %}
+<div class="container-editcontainer">
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Должность" class="form-control" name="jobtitlename"><br>
+        <p>Выбирите категорию:</p>
+        <select class="form-control" name="category">
+            <option value="1">Рабочий</option>
+            <option value="2">Служащий</option>
+            <option value="3">Специалист</option>
+        </select><br>
+
+        <button class="btn btn-success button-addjobtitle" type="submit">Добавить</button>
+
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
